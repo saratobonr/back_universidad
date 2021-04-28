@@ -10,16 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/saratobonr/back_universidad.git"
   },
-  "keywords": [
-    "saratobonr"
-  ],
   "author": "saratobonr",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/saratobonr/back_universidad/issues"
   },
-  "homepage": "https://github.com/saratobonr/back_universidad#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+  "homepage": "https://github.com/saratobonr/back_universidad#readme"
 }
