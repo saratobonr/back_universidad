@@ -5,3 +5,4 @@
 -https://expressjs.com/es/ 'npm install express --save'
 
 - 'node index.js'  ---> para volver a cargar nav
+- se detiene con ^C

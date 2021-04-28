@@ -5,27 +5,12 @@
  const express = require("express");
  const app = express();
 
+ const router = require('./app/routers/index');
 
- app.get("/inicio", (req, res) => {
-    res.send('Hello World!')
-  });
-
-
-  app.post("/", (req, res) => {
-    res.send('Hello World!')
-  });
-
-
-  app.put("/", (req, res) => {
-    res.send('Hello World!')
-  });
-
-  app.delete("/", (req, res) => {
-    res.send('Hello World!')
-  });
+ app.use("/", router);
 
   const PORT =3001;
 
   app.listen(PORT, () => {
-      console.log(`Server started on port: http://localhost:3001`);
+      console.log(`Server started on port: http://localhost:3001/inicio`);
   });
