@@ -91,10 +91,6 @@ const updatePersona = async (req, res) => {
         });  
     }
 
-
-
-
-    return res.send("Update persona");
 };
 
 const deletePersona = async (req, res) => {
@@ -119,11 +115,6 @@ const deletePersona = async (req, res) => {
             content: error,
         });
     }
-
-
-
-
-    return res.send("Delete persona");
 };
 
-module.exports = {getPersonas, createPersona, updatePersona, deletePersona};
+module.exports = {getPersonas, getPersona, createPersona, updatePersona, deletePersona};
