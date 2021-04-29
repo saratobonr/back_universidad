@@ -7,8 +7,9 @@ const getPersonas = async (req, res  ) => {
     
     let sql = 'select * from personas'
     let result = await _pg.ejecutarSql(sql);
+    let rows = result.rows;
 
-    return res.send(result);  
+    return res.send(rows);  
 };
 
 const createPersona = (req, res) => {
