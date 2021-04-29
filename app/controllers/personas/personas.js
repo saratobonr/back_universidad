@@ -1,6 +1,14 @@
 
-const getPersonas = (req, res  ) => {
-    return res.send("Get personas");  
+const PostgresService = require('../../services/postgres.service');
+const _pg = new PostgresService();
+
+
+const getPersonas = async (req, res  ) => {
+    
+    let sql = 'select * from personas'
+    let result = await _pg.ejecutarSql(sql);
+
+    return res.send(result);  
 };
 
 const createPersona = (req, res) => {
