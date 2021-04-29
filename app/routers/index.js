@@ -2,8 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/inicio", (req, res) => {
-    res.send('Hello Worldssss!')
-  });
+const _personasController = require('../controllers/personas/personas');
+
+router
+  .get("/inicio", _personasController.getPersonas)
+  .post("/inicio", _personasController.createPersona)
+  .put("/inicio", _personasController.updatePersona)
+  .delete("/inicio", _personasController.deletePersona);
 
 module.exports = router;
