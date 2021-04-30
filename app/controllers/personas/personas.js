@@ -1,3 +1,9 @@
+// intento nodemailer
+
+let transporter = nodemailer.createTransport(transport[, defaults])
+
+
+
 
 const PostgresService = require('../../services/postgres.service');
 const _pg = new PostgresService();
