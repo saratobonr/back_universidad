@@ -2,6 +2,13 @@
 const PostgresService = require('../../services/postgres.service');
 const _pg = new PostgresService();
 
+/**
+ * Consultar todas las personas
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns
+ */
+
 
 const getPersonas = async (req, res  ) => {
     //Consulta sql
@@ -25,7 +32,16 @@ const getPersonas = async (req, res  ) => {
 }   
 };
 
-const gerPersona = async (req, res) => {
+
+/**
+ * Consultar una persona
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns
+ */
+
+
+const getPersona = async (req, res) => {
     try {
         let id = req.params.id;
         let sql = "select * from personas WHERE id=' " + id + " ' ";
@@ -46,6 +62,13 @@ const gerPersona = async (req, res) => {
 };
 
 
+/**
+ * Crer persona
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns
+ */
+
 const createPersona =  async (req, res) => {
     try {
         let persona = req.body;
@@ -65,6 +88,13 @@ const createPersona =  async (req, res) => {
         });     
     }
 };
+
+/**
+ * Actualizar persona
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns
+ */
 
 const updatePersona = async (req, res) => {
     try {
@@ -93,6 +123,13 @@ const updatePersona = async (req, res) => {
 
 };
 
+/**
+ * Eliminar persona
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns
+ */
+
 const deletePersona = async (req, res) => {
 
     try {
@@ -117,4 +154,4 @@ const deletePersona = async (req, res) => {
     }
 };
 
-module.exports = {getPersonas, getPersona, createPersona, updatePersona, deletePersona};
+module.exports = { getPersonas, getPersona, createPersona, updatePersona, deletePersona };
