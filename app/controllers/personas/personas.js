@@ -77,16 +77,15 @@ const getPersona = async (req, res) => {
  */
 
 const createPersona =  async (req, res) => {
-    try {
+     try {
         let persona = req.body;
-        let sql = `INSERT INTO public.personas ("nombre", correo) VALUES($1, $2);`;
+        let sql = `INSERT INTO public.personas ("nombre", correo) VALUES($1, $2)`;
         let datos = [persona.nombre, persona.correo];
         let result = await _pg.ejecutarSql2(sql, datos);
 
-
         if (result.rowCount == 1){
             let asunto = "Bienvenido";
-            let cuerpo = `<h3> Bienvenido  ${persona.nombre} se ha registrado con éxito </h3>`;
+            let cuerpo = `<h3> Bienvenido  ${persona.nombre} se ha registrado con éxito </h3>`;            
             await _nodemailer.enviarCorreo(persona.correo, asunto, cuerpo);
         }
 
@@ -102,7 +101,6 @@ const createPersona =  async (req, res) => {
             content: error.toString(),
         });     
     }
-
     
 };
 

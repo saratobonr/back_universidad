@@ -7,10 +7,11 @@
 
 
 const router = require('./app/routers/index');
-const { post } = require("./app/routers/index");
+//const { post } = require("./app/routers/index");
 
   app.use("/", router);
-
+  app.use(express.json());
+  
   const PORT =3001;
 
   app.listen(PORT, () => {
