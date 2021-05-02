@@ -1,0 +1,69 @@
+ // nodemailer importación inicio
+ const nodemailer = require("nodemailer");
+ // nodemailer importación fin
+
+ // nodemailar enviar correo inicio
+
+    app.post("/send-correo", (req, res) => {
+        //para capturar error inicio
+        /**
+         * 
+         * try {            
+            console.log("Correo enviado")
+
+            return res.send({
+                ok: true,
+                message: "Correo enviado",
+            });
+        } catch (error) {
+
+            return res.send({
+                ok: false,
+                message: "El correo no se envio",
+                content: error,
+            });
+            
+        }
+         */  
+         // para capturar error fin
+        
+        // transportador para enviar correo incio
+        const transportador = nodemailer.createTransport({
+            host: "smtp.ethereal.email",
+            port: 587,
+            secure: false,
+            auth: {
+                user: "prince.runte@ethereal.email",
+                pass: "SwRF7AWyD8BBGBp5mb",
+            },
+
+        });
+        // transportador para enviar correo fin
+
+        // a quien se le enviara el correo y el texto inicio
+        const mailOptions = {
+            from: "Remitente",
+            to: "saratobon09@yahoo.com",
+            subject: "Agregado a la base de datos personas",
+            text: "Te registraste correctamente en la base de datos personas de la universidad",
+
+        }
+        
+        // a quien se le enviara el correo y el texto fin
+
+
+        //trasporte del correo y captura error inicio
+        transportador.sendMail(mailOptions, (error, info) => {
+            if(error){
+                res.status(500).send(error.message);
+            }else{
+                console.log("Correo enviado");
+                res.status(200).jsonp(req.body);
+            }
+        });
+        //trasporte del correo y captura error fin
+
+    });
+ 
+
+ //nodemailer enviar correo fin

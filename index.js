@@ -5,9 +5,11 @@
  const express = require("express");
  const app = express();
 
- const router = require('./app/routers/index');
 
- app.use("/", router);
+const router = require('./app/routers/index');
+const { post } = require("./app/routers/index");
+
+  app.use("/", router);
 
   const PORT =3001;
 

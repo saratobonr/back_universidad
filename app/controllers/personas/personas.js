@@ -1,12 +1,13 @@
 // intento nodemailer
 
-let transporter = nodemailer.createTransport(transport[, defaults])
-
-
-
-
+//let transporter = nodemailer.createTransport(transport[, defaults])
 const PostgresService = require('../../services/postgres.service');
 const _pg = new PostgresService();
+const nodemailerService = require('../../services/nodemailer.service');
+const _nodemailer = new nodemailerService();
+
+
+
 
 /**
  * Consultar todas las personas
@@ -79,10 +80,17 @@ const createPersona =  async (req, res) => {
     try {
         let persona = req.body;
         let sql = `INSERT INTO public.personas (nombre, correo) VALUES('${persona.nombre}', '${persona.correo}');`
+        let datos = [persona.nombre, persona.correo];
         let result = await _pg.ejecutarSql(sql)
 
+
+        if (result.rowCount == 1){
+            let asunto = "Bienvenido";
+            let cuerpo = `<h3> Bienvenido  ${persona.name} se ha registrado con éxito </h3>`;            
+            await _nodemailer.enviarCorreo(persona.correo, asunto, cuerpo);
+        }
         return res.send({
-            ok: result.rowCount ==1,
+            ok: result.rowCount == 1,
             message: result.rowCount == 1 ? "Persona creada" : "La persona no fue creada",
             content: persona,
     });
@@ -93,6 +101,8 @@ const createPersona =  async (req, res) => {
             content: error,
         });     
     }
+
+    
 };
 
 /**

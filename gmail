@@ -1,0 +1,34 @@
+//ensayo gmail inicio
+
+    // nodemailer inicio
+const nodemailer = require('nodemailer');
+// nodemailer fin
+
+    async function main(){
+
+    //let testAccoutn = await nodemailer.createTestAccount();
+
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+            user: "backuniversidadweb@gmail.com", // generated ethereal user
+            pass: "vmfjgufizghcwjxe", // generated ethereal password
+          },
+    });
+    let persona = req.body.correo;
+    let info = await transporter.sendMail({
+    from: "Remitente",
+    to: '${persona}',
+    subject: "Base de datos universidad",
+    text: "Su nombre y correo fueron agregados con éxito a la base de datos.",
+  });
+
+  console.log("Message sent: %s", info.messageId);
+
+}
+
+main().catch(console.error);
+
+//ensayo gmail fin
