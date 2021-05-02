@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 class nodemailerService {
 	constructor() {
         this.configTransporter()
-		this.correoRemitente = '"Universidad" <crea_un_correo@gmail.com>';
+		this.correoRemitente = '"Universidad" <backuniversidadweb@gmail.com>';
 	}
 
 	async configTransporter() {
@@ -28,6 +28,7 @@ class nodemailerService {
 			subject: asunto,
 			html: cuerpo,
 		});
+      
 	}
 }
 
