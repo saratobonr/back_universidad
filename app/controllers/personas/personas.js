@@ -1,15 +1,13 @@
 
+// base de datos
 const PostgresService = require('../../services/postgres.service');
 const _pg = new PostgresService();
-
+// correo
 const nodemailerService = require('../../services/nodemailer.service');
 const _nodemailer = new nodemailerService();
-
+// exceñ
 const excelService = require('../../services/exceljs.service');
 const _exceljs = new excelService();
-
-
-
 
 /**
  * Consultar todas las personas
@@ -17,7 +15,6 @@ const _exceljs = new excelService();
  * @param {Response} res 
  * @returns
  */
-
 
 const getPersonas = async (req, res  ) => {
     //Consulta sql
@@ -43,34 +40,10 @@ const getPersonas = async (req, res  ) => {
 
 
 /**
- * Consultar una persona
- * @param {Request} req 
- * @param {Response} res 
- * @returns
+ * Crear una persona y enviar correo de bienvenida
+ * @param {Require} req 
+ * @param {Responde} res 
  */
-
-
-// const getPersona = async (req, res) => {
-//     try {
-//         let id = req.params.id;
-//         let sql = "select * from personas WHERE id='" + id + "'";
-//         let result = await _pg.ejecutarSql(sql);
-//         let rows = result.rows;
-//         return res.send({
-//             ok: true,
-//             message: "Usuario consultado",
-//             content: rows[0],
-//         });
-//     } catch (error) {
-//         return res.send({
-//             ok:false,
-//             message: "Ha ocurrido un error consultando la persona",
-//             content: error,
-//         });
-//     }
-// };
-
-
 
 const createPersona =  async (req, res) => {
     
@@ -103,37 +76,10 @@ const createPersona =  async (req, res) => {
 };
 
 /**
- * Eliminar persona
- * @param {Request} req 
+ * Descarger en formato excel la tabla personas de la base de datos
+ * @param {Require} req 
  * @param {Response} res 
- * @returns
  */
-
-const deletePersona = async (req, res) => {
-
-    try {
-        let id = req.params.id;
-
-        let sql = `DELETE FROM public.personas
-        WHERE id='${id}'`;
-        let result = await _pg.ejecutarSql(sql);
-
-        return res.send({
-            ok: result.rowCount==1,
-            message: result.rowCount==1 ? "Usuario eliminado" : "El usuario no fue eliminado",
-            content: id,
-        });
-
-    } catch (error) {
-        return res.send({
-            ok: false,
-            message: "Ha ocurrido un error eliminando el usuario",
-            content: error,
-        });
-    }
-
-};
-
 const descargarInforme = async (req, res) => {
     let sql = `select id, nombre, correo FROM public.personas;`;
 
@@ -157,5 +103,4 @@ const descargarInforme = async (req, res) => {
     }
 }
 
-
-module.exports = { getPersonas, createPersona, deletePersona, descargarInforme };
+module.exports = { getPersonas, createPersona, descargarInforme };

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/saratobonr/back_universidad#readme",
   "dependencies": {
+    "exceljs": "^4.2.1",
     "express": "^4.17.1",
     "nodemailer": "^6.6.0",
     "pg": "^8.6.0"
