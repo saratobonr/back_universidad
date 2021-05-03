@@ -142,6 +142,7 @@ const updatePersona = async (req, res) => {
             ok:false,
             message: "Ha ocurrido un error modificando a la persona",
             content: error.toString(),
+            //hgf
         });  
     }
 
