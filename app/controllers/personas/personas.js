@@ -141,7 +141,7 @@ const updatePersona = async (req, res) => {
         return res.send({
             ok:false,
             message: "Ha ocurrido un error modificando a la persona",
-            content: error,
+            content: error.toString(),
         });  
     }
 
