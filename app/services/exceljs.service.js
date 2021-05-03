@@ -17,7 +17,7 @@ class excelService {
                 hoja1.addRow(persona);
         });
 
-        await this.doc1.writeFile("docs/universidas.xlsx");
+        await this.doc1.xlsx.writeFile("documentos-excel/universidad.xlsx");
     }
 }
 module.exports = excelService;
