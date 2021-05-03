@@ -1,10 +1,12 @@
-// intento nodemailer
 
-//let transporter = nodemailer.createTransport(transport[, defaults])
 const PostgresService = require('../../services/postgres.service');
 const _pg = new PostgresService();
-//const nodemailerService = require('../../services/nodemailer.service');
-//const _nodemailer = new nodemailerService();
+
+const nodemailerService = require('../../services/nodemailer.service');
+const _nodemailer = new nodemailerService();
+
+const excelService = require('../../services/exceljs.service');
+const _exceljs = new excelService();
 
 
 
@@ -32,11 +34,11 @@ const getPersonas = async (req, res  ) => {
         
     }catch (error) {
         return res.send({
-            ok:false,
+            ok: false,
             message: "Ha ocurrido un error consultando las personas",
             content: error,
         });   
-}   
+    }      
 };
 
 
@@ -48,55 +50,42 @@ const getPersonas = async (req, res  ) => {
  */
 
 
-const getPersona = async (req, res) => {
-    try {
-        let id = req.params.id;
-        let sql = "select * from personas WHERE id=' " + id + " ' ";
-        let result = await _pg.ejecutarSql(sql);
-        let rows = result.rows;
-        return res.send({
-            ok: true,
-            message: "Usuario consultado",
-            content: rows[0],
-        });
-    } catch (error) {
-        return res.send({
-            ok:false,
-            message: "Ha ocurrido un error consultando el usuario",
-            content: error,
-        });
-    }
-};
+// const getPersona = async (req, res) => {
+//     try {
+//         let id = req.params.id;
+//         let sql = "select * from personas WHERE id='" + id + "'";
+//         let result = await _pg.ejecutarSql(sql);
+//         let rows = result.rows;
+//         return res.send({
+//             ok: true,
+//             message: "Usuario consultado",
+//             content: rows[0],
+//         });
+//     } catch (error) {
+//         return res.send({
+//             ok:false,
+//             message: "Ha ocurrido un error consultando la persona",
+//             content: error,
+//         });
+//     }
+// };
 
 
-/**
- * Crer persona
- * @param {Request} req 
- * @param {Response} res 
- * @returns
- */
 
 const createPersona =  async (req, res) => {
-     try {
-        let persona = req.body;
-        //let sql = `INSERT INTO public.personas ("nombre", correo) VALUES('${persona.nombre}', '${persona.correo}');`;
-       
+    
+    try {
+        let persona = req.body;    
+        let sql = `INSERT INTO public.personas("nombre", correo) VALUES('${persona.nombre}', '${persona.correo}');`;
+        let datos = [persona.nombre, persona.correo];
+        //let result = await _pg.ejecutarSqlCorreo(sql, datos);
+        let result = await _pg.ejecutarSql(sql);
 
-
-        //no captura
-       let sql = `INSERT INTO public.personas (nombre, correo) VALUES($1,$2);`;
-
-       
-        // let datos = [persona.nombre, persona.correo];
-        //let result = await _pg.ejecutarSql2(sql, datos);
-let result = await _pg.ejecutarSql(sql);
-//
-
-//        if (result.rowCount == 1){
-  //          let asunto = "Bienvenido";
-    //        let cuerpo = `<h3> Bienvenido  ${persona.nombre} se ha registrado con éxito </h3>`;            
-      //      await _nodemailer.enviarCorreo(persona.correo, asunto, cuerpo);
-        //}
+       if (result.rowCount == 1){
+            let asunto = "Bienvenido";
+            let cuerpo = `<h3> Bienvenido  ${persona.nombre} se ha registrado con éxito </h3>`;            
+            await _nodemailer.enviarCorreo(persona.correo, asunto, cuerpo);
+        }
 
         return res.send({
             ok: result.rowCount == 1,
@@ -104,48 +93,13 @@ let result = await _pg.ejecutarSql(sql);
             content: persona,
     });
     }catch (error) {
-        return res.send({
+        console.log(error);
+        return res.send({ 
             ok: false,
             message: "Ha ocurrido un error crendo la persona",
             content: error.toString(),
         });     
     }
-   
-};
-
-/**
- * Actualizar persona
- * @param {Request} req 
- * @param {Response} res 
- * @returns
- */
-
-const updatePersona = async (req, res) => {
-    try {
-        let id= req.params.id;
-        let persona = req.body;
-
-        let sql = `UPDATE public.personas 
-        SET nombre='${persona.nombre}', correo='${persona.correo}' 
-        WHERE id='${id}'`;
-        let result = await _pg.ejecutarSql(sql);
-
-        return res.send({
-            ok: result.rowCount ==1,
-            message: result.rowCount==1 ? "Usuario modificado" : "El usuario no fue modificado",
-            content: persona,
-        });
-
-    } catch (error) {
-
-        return res.send({
-            ok:false,
-            message: "Ha ocurrido un error modificando a la persona",
-            content: error.toString(),
-            //ggg
-        });  
-    }
-
 };
 
 /**
@@ -177,6 +131,31 @@ const deletePersona = async (req, res) => {
             content: error,
         });
     }
+
 };
 
-module.exports = { getPersonas, getPersona, createPersona, updatePersona, deletePersona };
+const descargarInforme = async (req, res) => {
+    let sql = `select id, nombre, correo FROM public.personas;`;
+
+    try {
+        let result = await _pg.ejecutarSql(sql);
+        let rows = result.rows;
+
+        await _exceljs.hojas(rows);
+            return res.send({
+                ok:true,
+                message: "Excel creado con éxito",
+                url: "http://localhosto:3001/docs/universidad.xlsx",
+            });
+
+    } catch (error) {
+        return res.send({
+            ok:false,
+            message: "Error crendo el reporte de excel",
+            content: error,
+        });
+    }
+}
+
+
+module.exports = { getPersonas, createPersona, deletePersona, descargarInforme };

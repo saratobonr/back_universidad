@@ -1,11 +1,11 @@
 
-const pg = require('pg');
+const pg = require("pg");
 
 
 class PostgresService{
     constructor(){
         this.connectionString = "postgresql://postgres:1234@localhost:5432/universidad"; 
-        this.pool = new pg.Pool({connectionString:this.connectionString}); 
+        this.pool = new pg.Pool({connectionString: this.connectionString }); 
     }
 
     async ejecutarSql(sql){
@@ -13,7 +13,7 @@ class PostgresService{
         return result;
     }
 
-    async ejecutarSql2 (sql, datos){
+    async ejecutarSqlCorreo (sql, datos){
         let result = await this.pool.query(sql, datos);
         return result;
     }

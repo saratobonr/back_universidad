@@ -15,9 +15,9 @@ class nodemailerService {
 				user: "backuniversidadweb@gmail.com",
 				pass: "vmfjgufizghcwjxe" 
 			},
-           // tls: {
-             //   rejectUnauthorized: false
-          //}
+            tls: {
+               rejectUnauthorized: false
+			}
 		});
 	}
 	async enviarCorreo(destinatario, asunto, cuerpo) {
