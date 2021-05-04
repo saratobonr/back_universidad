@@ -12,3 +12,5 @@
 - Postgres https://node-postgres.com/ 'npm install pg'
 
 - Nodemailer https://nodemailer.com/ 'npm install nodemailer'
+
+- Exceljs https://www.npmjs.com/package/exceljs 'npm install exceljs'
