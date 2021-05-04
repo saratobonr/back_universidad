@@ -10,8 +10,7 @@ const _personasController = require('../controllers/personas/personas');
 router
   //crud personas
   .get("/inicio", _personasController.getPersonas)
-  .get("/inicio/excel", _personasController.descargarInforme)
-  .post("/inicio", _personasController.createPersona);
-
+  .post("/inicio", _personasController.createPersona)
+  .get("/inicio/excel", _personasController.descargarInforme);
 
 module.exports = router;

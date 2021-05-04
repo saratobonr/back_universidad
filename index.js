@@ -8,7 +8,7 @@
  const app = express();
  const path = require("path");
  app.use(express.json());
- app.use("/", router);
+ app.use('/', router);
 
  app.use(express.static(path.join(__dirname, "public")));
  app.use("/documentos-excel", express.static(path.join(__dirname, "dococumentos-excel")));
