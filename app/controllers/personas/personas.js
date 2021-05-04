@@ -91,14 +91,16 @@ const descargarInforme = async (req, res) => {
             return res.send({
                 ok:true,
                 message: "Excel creado con éxito",
-                url: "http://localhosto:3001/docs/universidad.xlsx",
+                url: "http://localhost:3001/documentos-excel/universidad.xlsx",
             });
 
     } catch (error) {
+        console.log(error)
         return res.send({
             ok:false,
             message: "Error crendo el reporte de excel",
-            content: error,
+            content: error.toString(),
+            
         });
     }
 }
