@@ -91,8 +91,7 @@ const descargarInforme = async (req, res) => {
         await _exceljs.hojas(rows);
             return res.send({
                 ok:true,
-                message: "Excel creado con éxito",
-                url: "http://localhost:3001/documentos-excel/universidad.xlsx",
+                message: "Excel creado con éxito y agregado a la carpeta documentos-excel",                
             });
            
     } catch (error) {
