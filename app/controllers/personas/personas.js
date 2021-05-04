@@ -7,7 +7,7 @@ const nodemailerService = require('../../services/nodemailer.service');
 const _nodemailer = new nodemailerService();
 // exce
 const excelService = require('../../services/exceljs.service');
-const _exceljs = new excelService();
+
 
 /**
  * Consultar todas las personas
@@ -37,7 +37,6 @@ const getPersonas = async (req, res  ) => {
         });   
     }      
 };
-
 
 /**
  * Crear una persona y enviar correo de bienvenida
@@ -76,19 +75,18 @@ const createPersona =  async (req, res) => {
 };
 
 /**
- * Descarger en formato excel la tabla personas de la base de datos
+ * Descargar en formato excel la tabla personas de la base de datos
  * @param {Require} req 
  * @param {Response} res 
  */
 const descargarInforme = async (req, res) => {
-    let sql = `select id, nombre, correo FROM public.personas;`;
+    let sql = `SELECT id, nombre, correo FROM public.personas;`;
 
     try {
         let result = await _pg.ejecutarSql(sql);
-        let rows = result.rows;
-
-
-        
+        let rows = result.rows;  
+        const _exceljs = new excelService();
+        //mover el const arriba      
 
         await _exceljs.hojas(rows);
             return res.send({

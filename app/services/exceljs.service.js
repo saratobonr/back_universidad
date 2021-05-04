@@ -2,10 +2,9 @@ const Exceljs = require("exceljs");
 
 class excelService {
     
-    constructor(){
+    constructor() {
         this.doc1 = new Exceljs.Workbook();
     }
-
 
     async hojas (personas){
         const hoja1 = this.doc1.addWorksheet();
