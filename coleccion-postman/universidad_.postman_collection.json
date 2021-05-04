@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "5c8a5f14-649c-4522-ae95-47e7cf37057a",
+		"name": "universidad_",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Consultar-personas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/inicio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"inicio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear-persona",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"nombre\":\"Sara9\",\n\"correo\":\"saratobon09@hotmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/inicio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"inicio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Descargar excel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/inicio/excel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"inicio",
+						"excel"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
