@@ -1,6 +1,5 @@
 const Exceljs = require("exceljs");
 
-
 class excelService {
     
     constructor(){
@@ -9,7 +8,7 @@ class excelService {
 
 
     async hojas (personas){
-        const hoja1 = this.doc1.addWorksheet("personas");
+        const hoja1 = this.doc1.addWorksheet();
         hoja1.columns = [
             {header: "Id", key: "id", width: 10},
             {header: "Nombre", key: "nombre", width: 32},

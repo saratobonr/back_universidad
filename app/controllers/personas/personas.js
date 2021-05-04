@@ -5,7 +5,7 @@ const _pg = new PostgresService();
 // correo
 const nodemailerService = require('../../services/nodemailer.service');
 const _nodemailer = new nodemailerService();
-// exceñ
+// exce
 const excelService = require('../../services/exceljs.service');
 const _exceljs = new excelService();
 
@@ -87,13 +87,16 @@ const descargarInforme = async (req, res) => {
         let result = await _pg.ejecutarSql(sql);
         let rows = result.rows;
 
+
+        
+
         await _exceljs.hojas(rows);
             return res.send({
                 ok:true,
                 message: "Excel creado con éxito",
                 url: "http://localhost:3001/documentos-excel/universidad.xlsx",
             });
-
+           
     } catch (error) {
         console.log(error)
         return res.send({
