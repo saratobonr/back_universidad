@@ -5,9 +5,9 @@ const _pg = new PostgresService();
 // correo
 const nodemailerService = require('../../services/nodemailer.service');
 const _nodemailer = new nodemailerService();
-// exce
+// excel
 const excelService = require('../../services/exceljs.service');
-
+const _exceljs = new excelService();
 
 /**
  * Consultar todas las personas
@@ -85,8 +85,7 @@ const descargarInforme = async (req, res) => {
     try {
         let result = await _pg.ejecutarSql(sql);
         let rows = result.rows;  
-        const _exceljs = new excelService();
-        //mover el const arriba      
+       
 
         await _exceljs.hojas(rows);
             return res.send({
